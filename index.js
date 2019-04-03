@@ -12,24 +12,39 @@ class App extends Component {
     };
   }
   handleChange = (ev) => {
-    this.setState({
+    if(ev.target.id === 'max' && (parseInt(ev.target.value)<this.state.min)){
+      alert('max must be MAX ha m3alem')
+      
+    }
+    else {
+
+       this.setState({
       [ev.target.id]:parseInt(ev.target.value)
     })
+    }
+   
   }
   handleSeeting = (ev) => {
     if(this.state.max < this.state.min){
+       let arr  = this.fillArray(this.state.min)
       this.setState({
-        max:this.state.min
+        max:this.state.min,
+         inputs:arr
       })
     }
+    
     if(ev.target.id === 'max'){
-      let arr  = this.fillArray(parseInt(ev.target.value))
-this.setState({
-      inputs:arr
-    })
+      if(parseInt(ev.target.value)>this.state.min )
+      {
+        let arr  = this.fillArray(parseInt(ev.target.value))
+      
+      this.setState({
+        inputs:arr
+      })
+      }
+      
     }
-    // let size = 0 ; 
-    // ev.target.id === 'max' ? size=parseInt(ev.target.value) : size = this.state.min
+
     
     console.log(this.state)
   }
@@ -56,7 +71,7 @@ this.setState({
         <hr/>
         {this.state.inputs.map((key)=>{
           return (
-            <input id={key} name={key} type='number' />
+            <input key={key} id={key} name={key} type='number' placeholder='fuck nahdha w nida' />
           )
         })}
       </div>
